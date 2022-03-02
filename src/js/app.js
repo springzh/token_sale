@@ -22,6 +22,7 @@ App = {
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
       web3 = new Web3(App.web3Provider);
     }
+    ethereum.enable();
     return App.initContracts();
   },
 
@@ -85,7 +86,7 @@ App = {
       return dappTokenSaleInstance.tokenPrice();
     }).then(function(tokenPrice) {
       App.tokenPrice = tokenPrice;
-      $('.token-price').html(web3.fromWei(App.tokenPrice, "ether").toNumber());
+      $('.token-price').html(web3.fromWei(App.tokenPrice.toNumber(), "ether"));
       return dappTokenSaleInstance.tokensSold();
     }).then(function(tokensSold) {
       App.tokensSold = tokensSold.toNumber();
