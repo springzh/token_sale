@@ -81,8 +81,9 @@ contract('DappTokenSale', function(accounts) {
     }).then(function(balance) {
       assert.equal(balance.toNumber(), 999990, 'returns all unsold dapp tokens to admin');
       // Check that the contract has no balance
-      balance = web3.eth.getBalance(tokenSaleInstance.address)
-      assert.equal(balance.toNumber(), 0);
+      return web3.eth.getBalance(tokenSaleInstance.address);
+    }).then(function(balance) {
+      assert.equal(balance, 0, 'balance must be 0 at the end of the sale');
     });
   });
 });

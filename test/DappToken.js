@@ -34,9 +34,9 @@ contract('DappToken', function(accounts) {
     return DappToken.deployed().then(function(instance) {
       tokenInstance = instance;
       // Test `require` statement first by transferring something larger than the sender's balance
-      return tokenInstance.transfer.call(accounts[1], 99999999999999999999999);
+      return tokenInstance.transfer.call(accounts[1], 999999999999999);
     }).then(assert.fail).catch(function(error) {
-      assert(error.message.indexOf('revert') >= 0, 'error message must contain revert');
+      assert(error.message.indexOf('revert') >= 0, 'error message must contain revert' + error.message);
       return tokenInstance.transfer.call(accounts[1], 250000, { from: accounts[0] });
     }).then(function(success) {
       assert.equal(success, true, 'it returns true');
